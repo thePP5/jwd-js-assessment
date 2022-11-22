@@ -46,13 +46,13 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       q: 'How many chambers are there in the human heart?',
-      o:['3','4,','5','6'],
-      a:1,
+      o: ['3', '4,', '5', '6'],
+      a: 1,
     },
     {
       q: 'Which is the biggest planet in the Solar System?',
-      o:['Mars','Saturn','Earth','Jupitar'],
-      a:3,
+      o: ['Mars', 'Saturn', 'Earth', 'Jupitar'],
+      a: 3,
     }
   ];
 
@@ -86,19 +86,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (radioElement.checked) {
           // code for task 1 goes here
-        if (quizItem.a == i) {
-          //change background color of li element here
-          score = score + 1;
-          console.log("you score now"+score);
-          console.log(liElement)
-          document.querySelector('#'+li).style.backgroundColor='green'
-          
-        }
+          if (quizItem.a == i) {
+            //change background color of li element here
+            score = score + 1;
+            console.log("you score now" + score);
+            console.log(liElement)
+            //document.querySelector('#'+li).style.backgroundColor='green'
+            liElement.setAttribute('style', 'background-color:#90EE90;')
+            //liElement.style.backgroundColor = 'green';
+            document.getElementById('score').innerHTML = score;
+          }
 
         }
       }
     });
-    
+
   };
 
   // call the displayQuiz function
@@ -108,53 +110,46 @@ window.addEventListener('DOMContentLoaded', () => {
 
   submit_button = document.getElementById("btnSubmit")
 
-  submit_button.addEventListener('click',()=>{
-  const scores = calculateScore();
-  displayQuiz();
-  console.log("button clicked")
-  alert(scores);
-  
+  submit_button.addEventListener('click', () => {
+    const scores = calculateScore();
+    setInterval(timerFunction, 0)
+
   });
-  
-  reset_button = document.getElementById(" btnReset")
 
-  /*reset_button.addEventListener('click',()=>{
-  radioElement.checked=false;
-  });*/
+  reset_button = document.getElementById("btnReset")
+
+  reset_button.addEventListener('click', () => {
+    //alert("display")
+    displayQuiz();
+    let timerVal = timerFunction();
+    setInterval(timerFunction, 0);
+  });
 
 
- 
 
-  let timeNew=document.getElementById("time");
+
+  let timeNew = document.getElementById("time");
   setInterval(timerFunction, 1000);
 
-// function timerFunction() {
-//   let d = new Date();
-//   document.getElementById("time").innerHTML=
-//   d.getHours() + ":" +
-//   d.getMinutes() + ":" +
-//   d.getSeconds();
-// }
 
+  var seconds = 60;
+  //var timer;
+  function timerFunction() {
+    if (seconds < 60) {
+      document.getElementById("time").innerHTML = seconds;
+    }
+    if (seconds > 0) {
+      seconds--;
+    } else {
+      //clearInterval(timer);
+      if (seconds === 0) {
+        document.getElementById("btnSubmit").disabled = true;
+      }
 
-var seconds=60;
-//var timer;
-function timerFunction() {
-  if(seconds < 60) {
-    document.getElementById("time").innerHTML = seconds;
+    }
   }
-     if (seconds >0 ) {
-         seconds--;
-     } else {
-         //clearInterval(timer);
-         if ( seconds===0){
-          document.getElementById("btnSubmit").disabled = true;
-         }
-         
-     }
-}
 
-  
+
 });
 
 

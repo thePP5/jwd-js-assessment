@@ -44,6 +44,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'How many chambers are there in the human heart?',
+      o:['3','4,','5','6'],
+      a:1,
+    },
+    {
+      q: 'Which is the biggest planet in the Solar System?',
+      o:['Mars','Saturn','Earth','Jupitar'],
+      a:3,
+    }
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -74,17 +84,78 @@ window.addEventListener('DOMContentLoaded', () => {
         liElement = document.querySelector('#' + li);
         radioElement = document.querySelector('#' + r);
 
-        if (quizItem.a == i) {
-          //change background color of li element here
-        }
-
         if (radioElement.checked) {
           // code for task 1 goes here
+        if (quizItem.a == i) {
+          //change background color of li element here
+          score = score + 1;
+          console.log("you score now"+score);
+          console.log(liElement)
+          document.querySelector('#'+li).style.backgroundColor='green'
+          
+        }
+
         }
       }
     });
+    
   };
 
   // call the displayQuiz function
   displayQuiz();
+  timerFunction();
+
+
+  submit_button = document.getElementById("btnSubmit")
+
+  submit_button.addEventListener('click',()=>{
+  const scores = calculateScore();
+  displayQuiz();
+  console.log("button clicked")
+  alert(scores);
+  
+  });
+  
+  reset_button = document.getElementById(" btnReset")
+
+  /*reset_button.addEventListener('click',()=>{
+  radioElement.checked=false;
+  });*/
+
+
+ 
+
+  let timeNew=document.getElementById("time");
+  setInterval(timerFunction, 1000);
+
+// function timerFunction() {
+//   let d = new Date();
+//   document.getElementById("time").innerHTML=
+//   d.getHours() + ":" +
+//   d.getMinutes() + ":" +
+//   d.getSeconds();
+// }
+
+
+var seconds=60;
+//var timer;
+function timerFunction() {
+  if(seconds < 60) {
+    document.getElementById("time").innerHTML = seconds;
+  }
+     if (seconds >0 ) {
+         seconds--;
+     } else {
+         //clearInterval(timer);
+         if ( seconds===0){
+          document.getElementById("btnSubmit").disabled = true;
+         }
+         
+     }
+}
+
+  
 });
+
+
+
